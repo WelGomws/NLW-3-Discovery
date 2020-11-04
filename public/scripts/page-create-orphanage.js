@@ -51,7 +51,17 @@ function toggleSelect(event) {
     button.classList.remove("active");
   });
   const button = event.currentTarget;
-  button.classList.add('active');
+  button.classList.add("active");
   const input = document.querySelector('[name="open_on_weekends"]');
   input.value = button.dataset.value;
+}
+
+function validate(event) {
+  const latSpan = document.querySelector("[name=lat]").value;
+  const lngSpan = document.querySelector("[name=lng]").value;
+  console.log(latSpan)
+  if (latSpan == "" || lngSpan == "") {
+    event.preventDefault();
+    alert("Selecione um ponto no mapa!");
+  }
 }

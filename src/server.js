@@ -2,15 +2,21 @@ const express = require("express");
 const path = require("path");
 const pages = require("./pages.js");
 
-const server = express();
+const route = express();
 
-server.use(express.static("public"));
-server.set("views", path.join(__dirname, "views"));
-server.set("view engine", "hbs");
+//utilizar body da request
+route.use(express.urlencoded({extended: true}))
 
-server.get("/", pages.index);
-server.get("/orphanages", pages.orphanages);
-server.get("/orphanage", pages.orphanage);
-server.get("/create-orphanage", pages.createOrphanage);
+// arquivos estaticos
+route.use(express.static("public"));
+route.set("views", path.join(__dirname, "views"));
+route.set("view engine", "hbs");
 
-server.listen(3000);
+//rotas
+route.get("/", pages.index);
+route.get("/orphanages", pages.orphanages);
+route.get("/orphanage", pages.orphanage);
+route.get("/create-orphanage", pages.createOrphanage);
+route.post("/save-orphanage", pages.saveOrphanage);
+
+route.listen(3000);
